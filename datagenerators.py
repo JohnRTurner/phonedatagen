@@ -60,5 +60,6 @@ def gen_events(batch_size, thread):
   seccg = [fake.random_int(min=100, max=9999) for _ in range(0,math.ceil(batch_size / 10))]
   return [gen_event(thread, fake, acct, esn, cg, secparty, seccg) for _ in range(1, (batch_size + 1))]
 
+#For testing the JSON data creation.
 if __name__ == '__main__':
     print(dumps(gen_events(1000,1)))
