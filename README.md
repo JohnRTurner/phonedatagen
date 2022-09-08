@@ -11,7 +11,7 @@ This project was generated with Python 3 and Docker.
 1. Install Docker - `sudo apt install docker.io nmon -y`
 1. Add Docker Group to User `sudo usermod -a -G docker ubuntu`
 1. Relogin for the user to gain access to Docker.
-1. Make a local copy of the application code found on [GitHub][github] by `git clone https://github.com/JohnRTurner/riviandatagen.git`
+1. Make a local copy of the application code found on [GitHub][github] by `git clone https://github.com/JohnRTurner/phonedatagen.git`
 1. Build the Docker image `docker build riviandatagen -t riviandatagen`
 1. Run the Image `docker run -d --name riviandatagen -e KAFKA_SERVER=localhost:29092 -e BATCH_SIZE=1000 -e KAFKA_TOPIC=test -e PROC_COUNT=8 -t riviandatagen`
 1. View the logs `docker logs -f riviandatagen`

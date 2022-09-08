@@ -1,52 +1,64 @@
 #from random import randrange, choice, uniform, getrandbits
-import time
+import math
 
 from faker import Faker
-from datetime import datetime
+from datetime import datetime, timedelta
+from json import dumps
 import numpy as np
 
+# ● Switch: The switch the call is hitting
+# ● Date: The date of the call
+# ● Time: The time of the start of the call (based on the switch)
+# ● Orig C/G: Valid cell site for outgoing calls (Only for MO calls)
+# ● Term C/G: Valid cell site for incoming calls (Only for MT calls)
+# ● Dir:
+#   – MO=Outgoing
+#   – MT=Incoming
+#   – MF=Incoming to voicemail and in rare cases, mobile forwarding
+# ● MDN: Your target number
+# ● Called #: If outgoing, this is the number your target dialed
+# ● ESN: Electronic Serial Number of your target
+# ● CPN: If incoming, this is the number that called your target
+# ● Szr: Duration of the call in seconds
+def gen_event(thread, fake, acct, esn, cg, secparty, seccg):
+ dttm = (datetime.now() - timedelta(seconds=fake.pyint(0, 86400 * 30))).strftime("%Y-%m-%d %H:%M:%S.%f")
 
+ if(fake.boolean()):
+     dir = "MT"  #incoming
+     tcg = cg
+     ocg = np.random.choice(seccg)
+     called = acct
+     cpn = np.random.choice(secparty)
 
-#Define a list
-type=['type_a','type_b','type_c', 'type_d', 'type_e' ]
-sub_type=['sub_type_100', 'sub_type_200','sub_type_300','sub_type_400','sub_type_500']
-source_type=['Car','Charger','R1T','R1S','Commercial Van']
-tenant=['Rivian','Corporate','Fleet','Other']
-realColumns=['fleet','raw_stream_ref','_subtype','_type','_updated','_seq','car_ownership_id','temperature_IGBT_A','motor_temperature','temperature_IGBT_C','temperature_IGBT_B','_id','updated','_source_type','tenant','std_stream_ref']
- 
-def gen_event(thread, fake):
+ else:
+     dir = "MO"  #outgoing
+     tcg = np.random.choice(seccg)
+     ocg = cg
+     called = np.random.choice(secparty)
+     cpn = acct
+
  return {
-   "fleet": fake.pystr(32,32) + '/' + fake.pystr(32,32) + '/' + fake.pystr(32,32),
-   'std_stream_ref': {
-       'partition': fake.random_int(1,32),
-       'offset': fake.random_number(digits=9),
-       'timestamp': datetime.timestamp(datetime.now())
-    },
-   'raw_stream_ref': {
-       'partition': fake.random_int(1, 32),
-       'offset': fake.random_number(digits=9),
-       'timestamp': datetime.timestamp(datetime.now())
-    },
-   "_subtype": np.random.choice(sub_type, p=(0.1, 0.1, 0.2, 0.2, 0.4)), #p(robability) has to add up to value of 1
-   "_type": np.random.choice(type),
-   '_event_timing': fake.random_int(1,10),
-   '_updated': datetime.today().strftime('%Y-%m-%dT%H:%M:%S.%f'),
-   '_seq': fake.random_number(digits=6),
-   'car_ownership_id': fake.random_number(digits=8),
-   'realColumns': realColumns,
-   'motor_temperature': fake.pyfloat(2,2,True,50,75), #pyfloat(left_digits=None, right_digits=None, positive=False, min_value=None, max_value=None)
-   'temperature_IGBT_A': fake.pyfloat(2,2,True,50,75),
-   'temperature_IGBT_B': fake.pyfloat(2,2,True,50,75),
-   'temperature_IGBT_C': fake.pyfloat(2,2,True,50,75),
-   '_id': ((time.clock_gettime_ns(time.CLOCK_MONOTONIC_RAW) % 100000000000) * 100) + thread,
-   'updated': 'null',
-   '_source_type': np.random.choice(source_type),
-   'tenant': np.random.choice(tenant)
+   "switch": fake.city(),
+   "Datetime": dttm, # last 30 days...
+   "Orig C/G": int(ocg),
+   "Term C/G": int(tcg),
+   "Dir": dir,
+   "MDN": int(acct),
+   "Called": int(called),
+   "ESN" :esn,
+   "CPN":int(cpn),
+   "szr":int(fake.random_int(min=3, max=1800))
  }
-
-
 
 def gen_events(batch_size, thread):
   Faker.seed()
   fake = Faker()
-  return [gen_event(thread, fake) for _ in range(1, (batch_size + 1))]
+  acct = fake.random_int(min=2001000000, max=8999999999)
+  esn = fake.bothify(text='????#######')
+  cg = fake.random_int(min=100, max=9999)
+  secparty = [fake.random_int(min=2001000000, max=8999999999) for _ in range(0,math.ceil(batch_size / 10))]
+  seccg = [fake.random_int(min=100, max=9999) for _ in range(0,math.ceil(batch_size / 10))]
+  return [gen_event(thread, fake, acct, esn, cg, secparty, seccg) for _ in range(1, (batch_size + 1))]
+
+if __name__ == '__main__':
+    print(dumps(gen_events(1000,1)))
