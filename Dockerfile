@@ -1,5 +1,5 @@
 #Deriving the latest base image
-FROM python:3.9.8
+FROM python:3.10.4-alpine3.16
 LABEL Maintainer="jturner"
 WORKDIR /opt/app
 COPY  . /opt/app/

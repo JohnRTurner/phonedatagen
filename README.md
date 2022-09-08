@@ -1,4 +1,4 @@
-# Rivian Datagen Demo
+# Phone Kafka SingleStore Datagen Demo
 
 The application creates test data in Kafka
 
@@ -42,6 +42,6 @@ Can view the code on [GitHub][github]
 | [singlestoresetup/README.md][singlestoresetup] | Instructions to setup SingleStore with Pipelines |
 
 
-[github]: https://github.com/JohnRTurner/riviandatagen
+[github]: https://github.com/JohnRTurner/phonedatagen
 [kafkasetup]: kafkasetup/README.md
 [singlestoresetup]: singlestoresetup/README.md
