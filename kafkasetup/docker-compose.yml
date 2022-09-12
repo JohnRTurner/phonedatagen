@@ -8,7 +8,9 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - 22181:2181
-
+    volumes:
+      - ~/zoo1/data:/var/lib/zookeeper/data
+      - ~/zoo1/log:/var/lib/zookeeper/log
   zookeeper-2:
     image: confluentinc/cp-zookeeper:latest
     environment:
@@ -16,7 +18,10 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - 32181:2181
-
+    volumes:
+      - ~/zoo2/data:/var/lib/zookeeper/data
+      - ~/zoo2/log:/var/lib/zookeeper/log
+      -
   kafka-1:
     image: confluentinc/cp-kafka:latest
     depends_on:
@@ -31,6 +36,8 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ~/data1:/var/lib/kafka/data
   kafka-2:
     image: confluentinc/cp-kafka:latest
     depends_on:
@@ -45,6 +52,8 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ~/data2:/var/lib/kafka/data
   kafka-3:
     image: confluentinc/cp-kafka:latest
     depends_on:
@@ -59,6 +68,8 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ~/data3:/var/lib/kafka/data
   kafka-4:
     image: confluentinc/cp-kafka:latest
     depends_on:
@@ -73,3 +84,5 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ~/data4:/var/lib/kafka/data

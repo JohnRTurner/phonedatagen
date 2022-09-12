@@ -13,7 +13,7 @@ This project was generated with Python 3 and Docker.
 1. Relogin for the user to gain access to Docker.
 1. Make a local copy of the application code found on [GitHub][github] by `git clone https://github.com/JohnRTurner/phonedatagen.git`
 1. Build the Docker image `docker build phonedatagen -t phonedatagen`
-1. Run the Image `docker run -d --name phonedatagen -e KAFKA_SERVER=localhost:29092 -e BATCH_SIZE=1000 -e KAFKA_TOPIC=test -e PROC_COUNT=8 -t phonedatagen`
+1. Run the Image `docker run -d --name phonedatagen -e KAFKA_SERVER=$(hostname):29092 -e BATCH_SIZE=1000 -e KAFKA_TOPIC=test -e PROC_COUNT=8 -t phonedatagen`
 1. View the logs `docker logs -f phonedatagen`
 1. Proceed to loading the data [SingleStore Setup][singlestoresetup]
 
