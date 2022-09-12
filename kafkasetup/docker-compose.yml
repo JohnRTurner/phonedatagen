@@ -21,7 +21,6 @@ services:
     volumes:
       - ~/zoo2/data:/var/lib/zookeeper/data
       - ~/zoo2/log:/var/lib/zookeeper/log
-      -
   kafka-1:
     image: confluentinc/cp-kafka:latest
     depends_on:
