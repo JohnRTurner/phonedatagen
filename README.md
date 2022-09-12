@@ -34,8 +34,8 @@ Can view the code on [GitHub][github]
 | datagenerators.py                              | Creates data and sends to Kafka                  |
 | kafka.py                                       | wrapper for Kafka calls                          |
 | README.md                                      | This file                                        |
-| Dockerfile                                     | Files not to copy to the repository              |
-| .dockerignore                                  | File to generate docker image                    |
+| .dockerignore                                  | Files not to copy to the repository              |
+| Dockerfile                                     | File to generate docker image                    |
 | requirements.txt                               | Python library requirements                      |
 | [kafkasetup/README.md][kafkasetup]             | Instructions to setup Kafka docker               |
 | kafkasetup/docker-compose.yml                  | Sample docker-compose.yml                        |
