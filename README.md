@@ -8,7 +8,7 @@ This project was generated with Python 3 and Docker.
 1. Setup Kafka Server as needed - [Kafka Quick Setup][kafkasetup]
 1. Obtain application server - can use AWS - Can share server with Kafka
 1. In AWS add the application server to the Security Group's Inbound Rules for the Kafka Server
-1. Install Docker - `sudo apt install docker.io nmon -y`
+1. Install Docker - `sudo apt install docker.io docker-compose nmon kafkacat -y`
 1. Add Docker Group to User `sudo usermod -a -G docker ubuntu`
 1. Relogin for the user to gain access to Docker.
 1. Make a local copy of the application code found on [GitHub][github] by `git clone https://github.com/JohnRTurner/phonedatagen.git`

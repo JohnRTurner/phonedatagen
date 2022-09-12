@@ -69,3 +69,7 @@ docker exec -it ubuntu_kafka-1_1 kafka-topics  --bootstrap-server localhost:2909
 ```
 kafkacat -C -b localhost:29092  -t test -o beginning -e -q| wc -l
 ```
+### Log onto the Docker
+```
+docker exec -it ubuntu_kafka-1_1 bash
+```
