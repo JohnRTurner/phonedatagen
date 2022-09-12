@@ -34,8 +34,8 @@ exit
 ### Login, docker-compose and run the docker
 ```
 ssh -i $HOME/Downloads/xxxxx.pem ubuntu@yyyyy.compute-1.amazonaws.com
-git clone https://github.com/JohnRTurner/riviandatagen.git
-cp riviandatagen/kafkasetup/docker-compose.yml .
+git clone https://github.com/JohnRTurner/phonedatagen.git
+cp phonedatagen/kafkasetup/docker-compose.yml .
 export MNAME=$(curl http://checkip.amazonaws.com 2>/dev/null |nslookup| grep "name =" |sed "s/.*name = //"|sed "s/.$//")
 docker-compose up -d
 ```
