@@ -46,23 +46,23 @@ def produce_orders(start_inv, start_inv_lock, thrd):
   global lock
   global batch_size
   global topic
-  #producer = kafka_producer(server=kafka_server)
+  producer = kafka_producer(server=kafka_server)
   while True:
     start = time()
-    print("Aquiring Lock")
+    #print("Aquiring Lock")
     start_inv_lock.acquire()
-    print(f"Lock Aquired for start_inv: {start_inv.value}")
+    #print(f"Lock Aquired for start_inv: {start_inv.value}")
     batch_start = start_inv.value
     start_inv.value =  batch_start + batch_size
     start_inv_lock.release()
-    print("Lock Released")
+    #print("Lock Released")
     events = gen_events(batch_start, batch_size, thrd)
-    #producer.poll(0.0)
-    #for o in events:
-    #  producer.produce(topic, value=dumps(o).encode('utf-8'), callback=acked)
-    #producer.flush()
+    producer.poll(0.0)
+    for o in events:
+      producer.produce(topic, value=dumps(o).encode('utf-8'), callback=acked)
+    producer.flush()
     tt  = time() - start
-    print(f"Thead: {thrd}  StartInv: {start_inv}  Event Count: {len(events)}  Total Time: {tt}\n", file = sys.stderr)
+    print(f"Thead: {thrd}  StartInv: {start_inv.value}  Event Count: {len(events)}  Total Time: {tt}", file = sys.stderr)
 
 
 
