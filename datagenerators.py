@@ -1,4 +1,4 @@
-#from random import randrange, choice, uniform, getrandbits
+# Creates Phone Data
 import math
 
 from faker import Faker

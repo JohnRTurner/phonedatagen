@@ -1,30 +1,12 @@
-#from random import randrange, choice, uniform, getrandbits
-import math
-
+# Creates Claim data
 from faker import Faker
 from datetime import datetime, timedelta
 from json import dumps
 import numpy as np
 import time as time
 
-# ● Switch: The switch the call is hitting
-# ● Date: The date of the call
-# ● Time: The time of the start of the call (based on the switch)
-# ● Orig C/G: Valid cell site for outgoing calls (Only for MO calls)
-# ● Term C/G: Valid cell site for incoming calls (Only for MT calls)
-# ● Dir:
-#   – MO=Outgoing
-#   – MT=Incoming
-#   – MF=Incoming to voicemail and in rare cases, mobile forwarding
-# ● MDN: Your target number
-# ● Called #: If outgoing, this is the number your target dialed
-# ● ESN: Electronic Serial Number of your target
-# ● CPN: If incoming, this is the number that called your target
-# ● Szr: Duration of the call in seconds
-
 type_of_injury = ['Shoulder','Knee','Paralyzed','Back']
 risk_score = ['Green','Yellow' ,'Red']
-
 
 def gen_event(thread, fake):
     return {
