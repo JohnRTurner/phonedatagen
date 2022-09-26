@@ -8,7 +8,7 @@
 
 | Tag Name   | Value            |
 |------------|------------------|
-| Name       | Riven_Test_Kafka |
+| Name       | Phone_Test_Kafka |
 | Owner      | jturner          |
 | CostCenter | SE               |
 | Project    | Riven_Test       |
