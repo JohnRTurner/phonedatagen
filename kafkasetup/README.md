@@ -47,7 +47,7 @@ docker-compose up -d
 | topic      | Name of the topic that you wish to create           | test    |
 | partitions | Should be 1x, 2x, or 4x the number of db partitions | 128     |
 ```
-docker exec -it ubuntu_kafka-1_1 kafka-topics  --bootstrap-server localhost:29092,localhost:29093,localhost:29094,localhost:29095 --topic test --create --partitions 128 --replication-factor 1
+docker exec -it ubuntu_kafka-1_1 kafka-topics  --bootstrap-server localhost:29092,localhost:29093,localhost:29094,localhost:29095 --topic test --create --partitions 128 --replication-factor 1  --config retention.ms=-1 
 ```
 ## General Instructions
 ### Stop Kafka
