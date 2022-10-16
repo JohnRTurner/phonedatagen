@@ -4,7 +4,7 @@ from time import time
 import multiprocessing as mp
 
 from kafka import kafka_producer, acked
-from datagenerators3 import gen_events
+from datagenerators4 import gen_events
 from json import dumps
 
 parser = argparse.ArgumentParser()
