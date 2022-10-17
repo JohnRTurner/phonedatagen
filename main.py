@@ -6,7 +6,7 @@ import multiprocessing as mp
 from kafka import kafka_producer, acked
 from datagenerators4 import gen_events
 from json import dumps
-from dateutil import tz
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-b', '--batch_size',
