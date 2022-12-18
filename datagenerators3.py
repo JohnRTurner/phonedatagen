@@ -1,6 +1,4 @@
 # Creates TCP-H line-item data.
-import math
-
 from faker import Faker
 from datetime import datetime, timedelta
 from json import dumps

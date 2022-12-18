@@ -78,6 +78,11 @@ kafkacat -C -b localhost:29092,localhost:29093,localhost:29094,localhost:29095 -
 ```
 kafkacat -C -b localhost:29092,localhost:29093,localhost:29094,localhost:29095 -t test -o beginning -e -q| wc -l
 ```
+### Insert Rows into Topic
+```
+docker exec -it ubuntu_kafka-1_1 kafka-console-producer  --bootstrap-server localhost:29092,localhost:29093,localhost:29094,localhost:29095 --topic test
+```
+then type rows of data followed by ctrl-c to end
 ### List Kafka Topic(s)
 ```
 docker exec -it ubuntu_kafka-1_1 kafka-topics  --bootstrap-server localhost:29092,localhost:29093,localhost:29094,localhost:29095 --list
